@@ -14,7 +14,7 @@ extern Model *modelCB4Module;
 extern Model *modelCB5Module;
 extern Model *modelCB6Module;
 extern Model *modelCB7Module;
-//extern Model *modelCB8Module;
+extern Model *modelCBmeterModule;
 //extern Model *modelCB9Module;
 //extern Model *modelCB10Module;
 
@@ -148,11 +148,20 @@ struct CB7_FrontPanel : CB_FrontPanel {
 	};
 };
 
+struct CBmeter_FrontPanel : CB_FrontPanel {
+	CBmeter_FrontPanel() {
+		setSvg(APP->window->loadSvg(asset::plugin(pluginInstance, "res/CB-meter-panel.svg")));
+		wrap();
+	};
+};
+
 //Panel Color Cycler
 struct CB_ColorCycler : TransparentWidget{
 	float *sig;
 	bool *active;
 	int *mode;
+	float *ystart;
+	float *ysize;
 	NVGcolor fillcolor;
 	float asig = 0;
 	CB_ZeroTrigger fliptrigger;
@@ -217,6 +226,23 @@ struct CB_ColorCyclerCircle : CB_ColorCycler{
 			fillcolor = procsig();
 			nvgBeginPath(args.vg);
 			nvgCircle(args.vg, 0.0, 0.0, box.size.x);
+			nvgFillColor(args.vg, fillcolor);
+			nvgFill(args.vg);
+			;
+		}
+	}
+};
+
+struct CB_ColorCyclerMeter : CB_ColorCycler{
+
+	void draw(const DrawArgs &args) override
+	{
+		if (*active == true)
+		{
+			box.pos.y = *ystart;
+			fillcolor = procsig();
+			nvgBeginPath(args.vg);
+			nvgRect(args.vg, 0.0, 0.0, box.size.x, *ysize);
 			nvgFillColor(args.vg, fillcolor);
 			nvgFill(args.vg);
 			;

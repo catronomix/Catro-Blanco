@@ -74,6 +74,14 @@
         "Blank",
         "Visual"
       ]
+    },
+	{
+      "slug": "CatroBlanco_CB-meter",
+      "name": "2hp Meter",
+      "description": "2hp decorated meter",
+      "tags": [
+        "Visual"
+      ]
     }
   ]
 }

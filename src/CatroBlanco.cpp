@@ -14,7 +14,7 @@ void init(Plugin *p) {
 	p->addModel(modelCB5Module);
 	p->addModel(modelCB6Module);
 	p->addModel(modelCB7Module);
-	//p->addModel(modelCB8Module);
+	p->addModel(modelCBmeterModule);
 	//p->addModel(modelCB9Module);
 	//p->addModel(modelCB10Module);
 
